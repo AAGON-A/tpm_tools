@@ -1,0 +1,8 @@
+[
+  {"number": 101, "title": "Migrate auth service to new token format", "state": "open", "html_url": "https://github.com/example/platform/issues/101", "assignee": {"login": "j-patel"}, "labels": [{"name": "epic"}, {"name": "auth"}]},
+  {"number": 108, "title": "Deprecate legacy rate limiter", "state": "open", "html_url": "https://github.com/example/platform/issues/108", "assignee": {"login": "m-santos"}, "labels": [{"name": "epic"}, {"name": "infra"}]},
+  {"number": 114, "title": "Ship unified API gateway v2", "state": "open", "html_url": "https://github.com/example/platform/issues/114", "assignee": {"login": "k-oduya"}, "labels": [{"name": "epic"}, {"name": "api"}]},
+  {"number": 119, "title": "Add per-tenant rate limiting", "state": "open", "html_url": "https://github.com/example/platform/issues/119", "assignee": {"login": "j-patel"}, "labels": [{"name": "epic"}, {"name": "infra"}]},
+  {"number": 123, "title": "Retire v1 webhook delivery system", "state": "open", "html_url": "https://github.com/example/platform/issues/123", "assignee": {"login": "m-santos"}, "labels": [{"name": "epic"}, {"name": "webhooks"}]},
+  {"number": 130, "title": "Add audit logging to platform events", "state": "closed", "html_url": "https://github.com/example/platform/issues/130", "assignee": {"login": "k-oduya"}, "labels": [{"name": "epic"}, {"name": "compliance"}]}
+]

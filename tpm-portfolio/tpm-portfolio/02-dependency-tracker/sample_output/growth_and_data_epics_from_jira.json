@@ -1,0 +1,113 @@
+{
+  "source": "jira_simulated",
+  "epics": [
+    {
+      "title": "Launch referral program v2",
+      "status": "in_progress",
+      "owner": "a-chen",
+      "source_system": "jira",
+      "external_id": "GR-101",
+      "url": "https://example.atlassian.net/browse/GR-101",
+      "team_name": "Growth"
+    },
+    {
+      "title": "Migrate onboarding flow to new activation model",
+      "status": "in_progress",
+      "owner": "s-ibrahim",
+      "source_system": "jira",
+      "external_id": "GR-102",
+      "url": "https://example.atlassian.net/browse/GR-102",
+      "team_name": "Growth"
+    },
+    {
+      "title": "Add self-serve upgrade flow",
+      "status": "not_started",
+      "owner": "a-chen",
+      "source_system": "jira",
+      "external_id": "GR-103",
+      "url": "https://example.atlassian.net/browse/GR-103",
+      "team_name": "Growth"
+    },
+    {
+      "title": "Sunset legacy trial-extension tool",
+      "status": "blocked",
+      "owner": "s-ibrahim",
+      "source_system": "jira",
+      "external_id": "GR-104",
+      "url": "https://example.atlassian.net/browse/GR-104",
+      "team_name": "Growth"
+    },
+    {
+      "title": "Instrument activation funnel events",
+      "status": "done",
+      "owner": "r-kowalski",
+      "source_system": "jira",
+      "external_id": "GR-105",
+      "url": "https://example.atlassian.net/browse/GR-105",
+      "team_name": "Growth"
+    },
+    {
+      "title": "Build pricing experimentation framework",
+      "status": "not_started",
+      "owner": "a-chen",
+      "source_system": "jira",
+      "external_id": "GR-106",
+      "url": "https://example.atlassian.net/browse/GR-106",
+      "team_name": "Growth"
+    },
+    {
+      "title": "Stand up unified event schema v2",
+      "status": "in_progress",
+      "owner": "t-nakamura",
+      "source_system": "jira",
+      "external_id": "DA-101",
+      "url": "https://example.atlassian.net/browse/DA-101",
+      "team_name": "Data"
+    },
+    {
+      "title": "Backfill historical activation events",
+      "status": "blocked",
+      "owner": "l-fontaine",
+      "source_system": "jira",
+      "external_id": "DA-102",
+      "url": "https://example.atlassian.net/browse/DA-102",
+      "team_name": "Data"
+    },
+    {
+      "title": "Deprecate legacy analytics pipeline",
+      "status": "not_started",
+      "owner": "t-nakamura",
+      "source_system": "jira",
+      "external_id": "DA-103",
+      "url": "https://example.atlassian.net/browse/DA-103",
+      "team_name": "Data"
+    },
+    {
+      "title": "Ship real-time revenue dashboard",
+      "status": "in_progress",
+      "owner": "l-fontaine",
+      "source_system": "jira",
+      "external_id": "DA-104",
+      "url": "https://example.atlassian.net/browse/DA-104",
+      "team_name": "Data"
+    },
+    {
+      "title": "Add data quality monitoring for event pipeline",
+      "status": "done",
+      "owner": "t-nakamura",
+      "source_system": "jira",
+      "external_id": "DA-105",
+      "url": "https://example.atlassian.net/browse/DA-105",
+      "team_name": "Data"
+    },
+    {
+      "title": "Build self-serve metrics layer for product teams",
+      "status": "not_started",
+      "owner": "l-fontaine",
+      "source_system": "jira",
+      "external_id": "DA-106",
+      "url": "https://example.atlassian.net/browse/DA-106",
+      "team_name": "Data"
+    }
+  ]
+}

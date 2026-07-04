@@ -1,0 +1,185 @@
+{
+  "source": "live",
+  "epics": [
+    {
+      "title": "GitHub Actions Cache Isolation [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1277",
+      "url": "https://github.com/github/roadmap/issues/1277",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Actions Runner Controller Release 0.14.1 [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1276",
+      "url": "https://github.com/github/roadmap/issues/1276",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Scale Set Job To Runner Assignment [Public Preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1275",
+      "url": "https://github.com/github/roadmap/issues/1275",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Release: Elevate Attestation as a First-Class Object in Repository UI and Security Overview [Public Preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1274",
+      "url": "https://github.com/github/roadmap/issues/1274",
+      "team_name": "Platform"
+    },
+    {
+      "title": "SBOM Export user interface and API support retrieval of dependency snapshots [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1273",
+      "url": "https://github.com/github/roadmap/issues/1273",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Users can now search their complete organization-wide dependencies [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1272",
+      "url": "https://github.com/github/roadmap/issues/1272",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Keyless GitHub App Tokens in Actions [Public Preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1271",
+      "url": "https://github.com/github/roadmap/issues/1271",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Granular Permissions for Repository Secrets and Variables",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1270",
+      "url": "https://github.com/github/roadmap/issues/1270",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Scoped secrets and reusable workflow improvements [Public Preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1269",
+      "url": "https://github.com/github/roadmap/issues/1269",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Locked Dependencies for GitHub Actions Workflows",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1268",
+      "url": "https://github.com/github/roadmap/issues/1268",
+      "team_name": "Platform"
+    },
+    {
+      "title": "[npm] Support multiple trusted publishing workflows per package [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1267",
+      "url": "https://github.com/github/roadmap/issues/1267",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Code scanning alerts link to GitHub Issues to facilitate collaboration and work management [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1266",
+      "url": "https://github.com/github/roadmap/issues/1266",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Dependabot now supports alerting on artifacts and non-default branches [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1265",
+      "url": "https://github.com/github/roadmap/issues/1265",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Agentic Autofix for Security Alerts in PRs [public preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1264",
+      "url": "https://github.com/github/roadmap/issues/1264",
+      "team_name": "Platform"
+    },
+    {
+      "title": "GitHub secret scanning - extended metadata is generally available [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1263",
+      "url": "https://github.com/github/roadmap/issues/1263",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Agentic autofix generation for code scanning alerts [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1262",
+      "url": "https://github.com/github/roadmap/issues/1262",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Attested SBOMs associated with artifacts are now visible in a repository's dependency graph [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1261",
+      "url": "https://github.com/github/roadmap/issues/1261",
+      "team_name": "Platform"
+    },
+    {
+      "title": "GitHub Enterprise Server now supports the \"one pipeline\" framework for dependency graph generation [GA]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1260",
+      "url": "https://github.com/github/roadmap/issues/1260",
+      "team_name": "Platform"
+    },
+    {
+      "title": "Workflow Execution Protections: Actor and Event Configuration [Public Preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1259",
+      "url": "https://github.com/github/roadmap/issues/1259",
+      "team_name": "Platform"
+    },
+    {
+      "title": "GitHub Code Quality: Org-level quality trends and time-series data [Public Preview]",
+      "status": "in_progress",
+      "owner": "unassigned",
+      "source_system": "github",
+      "external_id": "1258",
+      "url": "https://github.com/github/roadmap/issues/1258",
+      "team_name": "Platform"
+    }
+  ]
+}
