@@ -1,0 +1,91 @@
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="640" fill="#ffffff"/>
+
+  <text x="500" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a1a2e">Notification Service — Architecture Overview</text>
+  <text x="500" y="54" text-anchor="middle" font-size="13" fill="#666">Event-driven ingestion (ADR 001) · Shared service (ADR 002) · Tiered rate limiting (ADR 003)</text>
+
+  <!-- Producing teams -->
+  <g>
+    <rect x="30" y="100" width="160" height="60" rx="8" fill="#e8f0fe" stroke="#4285f4" stroke-width="1.5"/>
+    <text x="110" y="125" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a2e">Checkout</text>
+    <text x="110" y="143" text-anchor="middle" font-size="11" fill="#555">order.shipped</text>
+
+    <rect x="30" y="190" width="160" height="60" rx="8" fill="#e8f0fe" stroke="#4285f4" stroke-width="1.5"/>
+    <text x="110" y="215" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a2e">Identity</text>
+    <text x="110" y="233" text-anchor="middle" font-size="11" fill="#555">password.reset_requested</text>
+
+    <rect x="30" y="280" width="160" height="60" rx="8" fill="#e8f0fe" stroke="#4285f4" stroke-width="1.5"/>
+    <text x="110" y="305" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a2e">Marketing</text>
+    <text x="110" y="323" text-anchor="middle" font-size="11" fill="#555">campaign.triggered</text>
+  </g>
+
+  <!-- Event bus -->
+  <rect x="270" y="150" width="150" height="140" rx="8" fill="#fff4e5" stroke="#f4a125" stroke-width="1.5"/>
+  <text x="345" y="180" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">Event Bus</text>
+  <text x="345" y="200" text-anchor="middle" font-size="11" fill="#555">(pub/sub)</text>
+  <text x="345" y="225" text-anchor="middle" font-size="10" fill="#777">tier tagged</text>
+  <text x="345" y="240" text-anchor="middle" font-size="10" fill="#777">at publish</text>
+  <text x="345" y="255" text-anchor="middle" font-size="10" fill="#777">(ADR 003)</text>
+
+  <!-- arrows from teams to bus -->
+  <line x1="190" y1="130" x2="270" y2="190" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="190" y1="220" x2="270" y2="220" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="190" y1="310" x2="270" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Notification service core -->
+  <rect x="470" y="120" width="220" height="220" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5"/>
+  <text x="580" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Notification Service</text>
+
+  <rect x="490" y="160" width="180" height="34" rx="5" fill="#ffffff" stroke="#34a853" stroke-width="1"/>
+  <text x="580" y="181" text-anchor="middle" font-size="11" fill="#1a1a2e">Tier 1: Transactional (no limit)</text>
+
+  <rect x="490" y="202" width="180" height="34" rx="5" fill="#ffffff" stroke="#34a853" stroke-width="1"/>
+  <text x="580" y="223" text-anchor="middle" font-size="11" fill="#1a1a2e">Tier 2: Account (soft cap)</text>
+
+  <rect x="490" y="244" width="180" height="34" rx="5" fill="#ffffff" stroke="#34a853" stroke-width="1"/>
+  <text x="580" y="265" text-anchor="middle" font-size="11" fill="#1a1a2e">Tier 3: Marketing (hard quota)</text>
+
+  <text x="580" y="300" text-anchor="middle" font-size="10" fill="#777">Owns: consent store,</text>
+  <text x="580" y="314" text-anchor="middle" font-size="10" fill="#777">templates, delivery tracking</text>
+
+  <line x1="420" y1="220" x2="470" y2="220" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- REST API (read-only) -->
+  <rect x="470" y="380" width="220" height="70" rx="8" fill="#f3e8fd" stroke="#9334e6" stroke-width="1.5"/>
+  <text x="580" y="405" text-anchor="middle" font-size="13" font-weight="600" fill="#1a1a2e">REST API</text>
+  <text x="580" y="423" text-anchor="middle" font-size="10" fill="#555">status · consent · templates</text>
+  <text x="580" y="437" text-anchor="middle" font-size="10" fill="#777">(read/write consent only — ADR 001)</text>
+
+  <line x1="580" y1="340" x2="580" y2="380" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Support tooling consumer -->
+  <rect x="770" y="390" width="170" height="50" rx="8" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5"/>
+  <text x="855" y="412" text-anchor="middle" font-size="12" font-weight="600" fill="#1a1a2e">Support / Admin Tools</text>
+  <text x="855" y="428" text-anchor="middle" font-size="10" fill="#555">debugging &amp; consent mgmt</text>
+
+  <line x1="690" y1="415" x2="770" y2="415" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Vendor -->
+  <rect x="770" y="140" width="170" height="60" rx="8" fill="#eef1f5" stroke="#5f6368" stroke-width="1.5"/>
+  <text x="855" y="165" text-anchor="middle" font-size="12" font-weight="600" fill="#1a1a2e">Email/SMS/Push</text>
+  <text x="855" y="182" text-anchor="middle" font-size="11" fill="#555">Vendor (single contract)</text>
+
+  <line x1="690" y1="200" x2="770" y2="175" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <text x="30" y="440" font-size="11" fill="#777">Legend:</text>
+  <rect x="30" y="450" width="14" height="14" fill="#e8f0fe" stroke="#4285f4"/>
+  <text x="50" y="461" font-size="11" fill="#333">Producing team (emits domain events)</text>
+  <rect x="30" y="472" width="14" height="14" fill="#e6f4ea" stroke="#34a853"/>
+  <text x="50" y="483" font-size="11" fill="#333">Shared Notification Service (ADR 002)</text>
+  <rect x="30" y="494" width="14" height="14" fill="#f3e8fd" stroke="#9334e6"/>
+  <text x="50" y="505" font-size="11" fill="#333">Read/write REST API surface</text>
+  <rect x="30" y="516" width="14" height="14" fill="#eef1f5" stroke="#5f6368"/>
+  <text x="50" y="527" font-size="11" fill="#333">External vendor</text>
+</svg>

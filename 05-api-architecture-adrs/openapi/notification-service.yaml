@@ -1,0 +1,237 @@
+openapi: 3.0.3
+info:
+  title: Notification Service API
+  description: >
+    Shared notification platform used by Checkout, Identity, and Marketing teams.
+    Notification *sends* are triggered via events on the internal event bus (see ADR 001)
+    — this REST API is intentionally limited to read/status operations and
+    consent management, per that architectural decision.
+  version: 1.0.0
+  contact:
+    name: Notification Platform Team
+
+servers:
+  - url: https://api.internal.example.com/notifications/v1
+
+tags:
+  - name: Notifications
+    description: Read-only status and history for notifications sent
+  - name: Consent
+    description: User opt-in/opt-out management (single source of truth across all teams)
+  - name: Templates
+    description: Manage notification templates used by producing teams
+
+paths:
+  /notifications/{notificationId}:
+    get:
+      tags: [Notifications]
+      summary: Get delivery status for a single notification
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Notification status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationStatus"
+        "404":
+          description: Notification not found
+
+  /notifications:
+    get:
+      tags: [Notifications]
+      summary: List notifications for a user (for support/debugging tooling)
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: channel
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [email, sms, push]
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        "200":
+          description: List of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NotificationStatus"
+
+  /consent/{userId}:
+    get:
+      tags: [Consent]
+      summary: Get a user's current consent/opt-out status per channel
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current consent status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsentStatus"
+
+    put:
+      tags: [Consent]
+      summary: Update a user's consent/opt-out status
+      description: >
+        This is the single write path for consent across all producing teams —
+        the entire point of the shared service (see ADR 002) is that no team
+        maintains its own separate opt-out list.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsentUpdateRequest"
+      responses:
+        "200":
+          description: Updated consent status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsentStatus"
+        "400":
+          description: Invalid request body
+
+  /templates:
+    get:
+      tags: [Templates]
+      summary: List available notification templates
+      parameters:
+        - name: team
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [checkout, identity, marketing]
+      responses:
+        "200":
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Template"
+
+components:
+  schemas:
+    NotificationStatus:
+      type: object
+      properties:
+        notificationId:
+          type: string
+        userId:
+          type: string
+        channel:
+          type: string
+          enum: [email, sms, push]
+        tier:
+          type: string
+          description: Priority tier assigned at publish time — see ADR 003
+          enum: [transactional, account, marketing]
+        status:
+          type: string
+          enum: [queued, sent, delivered, bounced, failed, suppressed]
+        sourceEvent:
+          type: string
+          description: The domain event that triggered this notification, e.g. order.shipped
+        sourceTeam:
+          type: string
+          enum: [checkout, identity, marketing]
+        createdAt:
+          type: string
+          format: date-time
+        deliveredAt:
+          type: string
+          format: date-time
+          nullable: true
+        failureReason:
+          type: string
+          nullable: true
+
+    ConsentStatus:
+      type: object
+      properties:
+        userId:
+          type: string
+        email:
+          type: string
+          enum: [opted_in, opted_out]
+        sms:
+          type: string
+          enum: [opted_in, opted_out]
+        push:
+          type: string
+          enum: [opted_in, opted_out]
+        updatedAt:
+          type: string
+          format: date-time
+
+    ConsentUpdateRequest:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum: [email, sms, push]
+        status:
+          type: string
+          enum: [opted_in, opted_out]
+        source:
+          type: string
+          description: Which team/surface triggered this change, for audit purposes
+      required: [channel, status, source]
+
+    Template:
+      type: object
+      properties:
+        templateId:
+          type: string
+        name:
+          type: string
+        team:
+          type: string
+          enum: [checkout, identity, marketing]
+        channel:
+          type: string
+          enum: [email, sms, push]
+        version:
+          type: integer
+
+  securitySchemes:
+    internalAuth:
+      type: apiKey
+      in: header
+      name: X-Internal-Service-Token
+
+security:
+  - internalAuth: []
