@@ -1,5 +1,7 @@
 # TPM Portfolio
 
+![Refresh Reports](https://github.com/AAGON-A/tpm-portfolio/actions/workflows/refresh-reports.yml/badge.svg)
+
 A small set of artifacts demonstrating the technical range expected of a Technical Program Manager: data-driven program tracking, and technical architecture judgment — without pretending to be a software engineering portfolio.
 
 ## What a TPM actually needs to prove technically
@@ -37,3 +39,12 @@ This repo has one project for each of the first two, combined, and one for the t
 ## How to use this if you're evaluating me
 
 Start with the ADRs (`05-api-architecture-adrs/adrs/`) if you want to see technical judgment and writing. Start with `01-program-health-dashboard/sample_output/weekly_status_report.md` or `02-dependency-tracker/sample_output/dependency_risk_report.md` if you want to see the data side.
+
+## Automation
+
+A GitHub Actions workflow (`.github/workflows/refresh-reports.yml`) regenerates both the dashboard and dependency-tracker outputs automatically:
+- On every push that touches those project folders
+- On a weekly schedule (Mondays), so the live GitHub-sourced data in project 02 stays current
+- On demand — go to the **Actions** tab → **Refresh TPM Reports** → **Run workflow**
+
+The workflow commits the refreshed reports and charts straight back into `sample_output/`, so what you see in the repo is never a stale one-time snapshot.

@@ -1,0 +1,65 @@
+name: Refresh TPM Reports
+
+# Runs the dashboard + dependency tracker scripts and commits fresh output
+# back into the repo, so sample_output/ always reflects a real, recent run
+# rather than a stale one-time snapshot.
+
+on:
+  # Manual trigger — click "Run workflow" in the Actions tab
+  workflow_dispatch:
+
+  # Auto-run whenever the underlying scripts or SQL change
+  push:
+    branches: [main]
+    paths:
+      - "01-program-health-dashboard/**"
+      - "02-dependency-tracker/**"
+      - ".github/workflows/refresh-reports.yml"
+
+  # Weekly refresh so the GitHub-sourced epics in project 02 stay current
+  schedule:
+    - cron: "0 13 * * 1"  # every Monday 13:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: 01-program-health-dashboard
+        run: pip install -r requirements.txt
+
+      - name: Generate mock data
+        working-directory: 01-program-health-dashboard/scripts
+        run: python generate_mock_data.py
+
+      - name: Generate report
+        working-directory: 01-program-health-dashboard/scripts
+        run: python generate_report.py
+
+      - name: Refresh dependency tracker data
+        working-directory: 02-dependency-tracker/scripts
+        run: |
+          pip install -r ../requirements.txt
+          python fetch_github_epics.py
+          python generate_jira_epics.py
+          python load_and_link_dependencies.py
+          python analyze_dependencies.py
+
+      - name: Commit refreshed outputs
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-refresh sample reports [skip ci]"
+          file_pattern: |
+            01-program-health-dashboard/sample_output/**
+            02-dependency-tracker/sample_output/**
